@@ -28,3 +28,11 @@ body {
     height: 300px;
     padding-top:200px;
 }
+#menu{
+    position:fixed;
+}
+.button{
+    height: 50px;
+    width: 50px;
+    border: solid black 3px;
+}
