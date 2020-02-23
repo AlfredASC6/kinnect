@@ -1,0 +1,16 @@
+#menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position:fixed;
+    border: solid blue 3px; 
+    height: 100%;
+}
+.button {
+    height: 50px;
+    width:50px;
+}
+#room {
+    height: 300px;
+    width: 450px;
+}
