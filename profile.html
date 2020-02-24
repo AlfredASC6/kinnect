@@ -6,30 +6,43 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel = "stylesheet" type = "text/css" href = "profile.css">
         <title>Profile</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </head>
     <body>
         
         <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <a href="index.html">Home</a>
-                <a href="chatroom.html">Chat</a>
+                <a href="room.html">Chat</a>
                 <a href="profile.html">Profile</a>
                 <a href="settings.html">Settings</a>
         </div>  
-        <div id = "profile-image">
-            <span onclick="openNav()" id = "open">Open</span>
-            <img src = "images/emptyprofilepic.png">
+        <div id = "heading">
+            <h1>Profile</h1>
         </div>
-        <div>
+        <div id = "profile-image">
+            <span onclick="openNav()" id = "open"><i class = "material-icons">menu</i></span>
+            <img src = "images/emptyprofilepic.png" id ="img">
+        </div>
+        <div id = "overarching-div">
             <div id = "profile-info">
-                <div class = "info-display">Username: <div id = "username"> Charles </div></div>
-                <div class = "info-display">Opening Quote</div>
-                <div class = "info-display">Hobbies</div>
-                <div class = "info-display">Preffered Topics</div>
-                <div class = "info-display">Country</div>
+                <div class = "info-display">Username:</div>
+                <div class = "info-display">Opening Quote:</div>
+                <div class = "info-display">Hobbies:</div>
+                <div class = "info-display">Preffered Topics:</div>
+                <div class = "info-display">Country:</div>
+            </div>
+            <div id = "info">
+                <div class = "input-info" id = "tbc-username">Charles</div>
+                <div class = "input-info" id = "tbc-quote">I'm just here because I'm bored</div>
+                <div class = "input-info" id = "tbc-hobbies">I like long distance running</div>
+                <div class = "input-info" id = "tbc-topics">Whatever</div>
+                <div class = "input-info" id = "tbc-country">United States</div>
             </div>
         </div>
-
+        <div id = "anything-else"></div>
         <script>
                 /* Set the width of the side navigation to 250px */
                 function openNav() {

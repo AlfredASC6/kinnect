@@ -1,12 +1,188 @@
-#menu{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position:fixed;
-    border: solid blue 3px; 
-    height: 100%;
+body {
+    margin-top: 0px;
+    margin-right:0px;
+    margin-left:0px;
+    margin-bottom:0px;
+}
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }
 .button {
     height: 50px;
     width:50px;
+}
+#open{
+    position: absolute;
+    left:30px;
+    top:30px;
+    float: left;
+}
+#top {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(230, 216, 215);
+    padding-bottom: 100px;
+}
+.info-display{
+    padding: 10px;
+    background-color: rgb(230, 216, 215);
+}
+
+#profile-info{
+    position: absolute;
+    top: 389px;
+    left: 450px;
+    width: 200px;
+}
+#info {
+    position: absolute;
+    top: 389px;
+    left: 680px;  
+    width: 200px;
+}
+#img{
+    border: solid black 2px;
+}  
+.input-info{
+    padding:10px;
+    background-color: rgb(230, 216, 215);
+    width:300px;
+}
+.different {
+    padding: 10px;
+    background-color: black;
+    width: 200px;
+    color: white;
+}
+#change-div {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 242px;
+    left:680px;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+  /* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+  
+  /* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(230, 216, 215);
+}
+#change {
+    height:50px;
+    width: 200px;
+
+}
+/* #filler {
+    display: flex;
+    justify-content: center;
+
+    background-color: rgb(230, 216, 215);
+    padding-bottom: 200px;
+} */
+#myBtn {
+    position: absolute;
+    top: 330px;
+    left:570px;
+}
+#filler2 {
+    height: 149px;
+    background-color: black;
+    padding-bottom:16px;
+}
+
+#overarching-div {
+    background-color: rgb(230, 216, 215);
+    height: 150px;
+    padding-bottom: 15px;
+}
+#heading {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(230, 216, 215);
+}
+#profile-pic {
+    border: solid black 2px;
 }

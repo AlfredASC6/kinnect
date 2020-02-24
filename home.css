@@ -1,0 +1,53 @@
+body {
+    margin-top: 0px;
+    margin-right:0px;
+    margin-left:0px;
+    margin-bottom:0px;
+}
+#logo {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(230, 216, 215);
+    height:500px;
+}
+#image {
+    width: 540px;
+    height: 500px;
+}
+#button-holder {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(230, 216, 215);
+    padding-bottom: 10px;
+}
+#guest {
+    border-radius: 15px;
+    height: 21.33;
+    width: 87.91px;
+}
+#sign-in {
+    height:21.33px;
+    width: 87.91px;
+    border-radius: 15px;
+    padding-bottom: 2px;
+}
+.button {
+    background-color: white;
+    padding: 5px;
+    transition-duration: 0.4s;
+}
+  
+.button:hover {
+    border: solid black 2px;
+    background-color: rgb(71, 58, 255); 
+    color: white;
+}
+#filler{ 
+    margin-top: 0px;
+    background-color: black;
+    height: 100px;
+}
+#desc {
+    color: white;
+    background-color: black;
+}
