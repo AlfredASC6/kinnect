@@ -26,7 +26,7 @@ body {
     width: 87.91px;
 }
 #sign-in {
-    height:21.33px;
+    height:28.33px;
     width: 87.91px;
     border-radius: 15px;
     padding-bottom: 2px;
@@ -38,16 +38,27 @@ body {
 }
   
 .button:hover {
-    border: solid black 2px;
-    background-color: rgb(71, 58, 255); 
+    border: solid rgb(71, 58, 255) 2px; 
+    background-color: rgb(252, 163, 30); 
     color: white;
+    cursor: pointer;
 }
-#filler{ 
+#extra{ 
+    display: flex;
+    justify-content: center;
     margin-top: 0px;
     background-color: black;
-    height: 100px;
+    height: 200px;
 }
 #desc {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
     color: white;
     background-color: black;
+    width: 400px;
+    height: 100px;
+}
+.tag {
+    text-decoration: none;
 }
