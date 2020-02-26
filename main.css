@@ -95,3 +95,17 @@ padding: 20px;
     width: 100px;
     padding: 10px;
 }
+#logo {
+    height: 400px;
+    width: 400px;
+}
+#placeholder {
+    width: 200px;
+    height: 300px;
+    border: solid black 2px;
+    position: absolute;
+    top: 50px;
+    right:75px;
+    background-color: rgb(230, 216, 215);
+    overflow: auto;
+}
