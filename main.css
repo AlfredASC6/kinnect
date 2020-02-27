@@ -100,12 +100,26 @@ padding: 20px;
     width: 400px;
 }
 #placeholder {
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 370px;
     border: solid black 2px;
     position: absolute;
-    top: 50px;
-    right:75px;
+    top: 30px;
+    right:50px;
     background-color: rgb(230, 216, 215);
     overflow: auto;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border-radius: 15px;
+}
+
+#chat-title {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(230, 216, 215);
+    height: 25px;
+    border-bottom-style: solid;
+    border-collapse: separate;
+    border-spacing: 10px;
+    border-radius: 15px;
 }

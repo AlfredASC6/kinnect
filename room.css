@@ -112,3 +112,31 @@ body {
 /* #open.hover {
     cursor: pointer;
 } */
+#placeholder {
+    width: 250px;
+    height: 370px;
+    border: solid black 2px;
+    position: absolute;
+    top: 98px;
+    left:90px;
+    background-color: #283044;
+    overflow: auto;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border-radius: 15px;
+
+}
+
+#chat-title {
+    display: flex;
+    /* justify-content: center; */
+    background-color: #283044;
+    color: white;
+    height: 25px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-collapse: separate;
+    border-spacing: 10px;
+    border-radius: 15px;
+    padding-left: 5px;
+}

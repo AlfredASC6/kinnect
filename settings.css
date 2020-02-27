@@ -93,6 +93,13 @@ body {
     padding:10px;
     background-color: rgb(230, 216, 215);
     width:300px;
+    border-radius: 15px;
+}
+.ninput-info{
+    padding:10px;
+    background-color: #283044;
+    width:300px;
+    border-radius: 15px;
 }
 .different {
     padding: 10px;
@@ -113,21 +120,22 @@ body {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
-    top: 0;
+    top: 0%;
+    margin-top:0%;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-  
+
   /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: fit-content;  /*Could be more or less, depending on screen size */
 }
   
   /* The Close Button */
@@ -148,12 +156,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(230, 216, 215);
+    background-color: #283044;
+    border-radius: 15px;
+    color: white;
 }
 #change {
     height:50px;
     width: 200px;
-
+    border-radius: 15px;
 }
 /* #filler {
     display: flex;
@@ -162,10 +172,21 @@ body {
     background-color: rgb(230, 216, 215);
     padding-bottom: 200px;
 } */
+#myModal {
+    height: 120vh;
+}
 #myBtn {
     position: absolute;
     top: 330px;
     left:570px;
+    border-radius: 15px;
+    box-shadow: 5px 10px 8px #888888;
+    background-color: rgb(2, 191, 224);
+    border-bottom-color: rgb(83, 83, 83);
+    border-top-color: black;
+    border-right-color: rgb(83,83,83);
+    border-left-color:black;
+    border-bottom-style: solid;
 }
 #filler2 {
     height: 149px;
@@ -185,4 +206,8 @@ body {
 }
 #profile-pic {
     border: solid black 2px;
+    border-radius: 15px;
+}
+span.hover {
+    cursor: pointer;
 }

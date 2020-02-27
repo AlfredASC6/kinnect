@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Sign Up</title>
         <link rel = "stylesheet" type = "text/css" href = "sign.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id = "top">
@@ -15,15 +16,36 @@
             <img src = "images/Kinnect.png" id = "logo">
         </div>
         <div id = "sign-up-div">
-            <form id = "sign-up-form">
+            <form id = "sign-up-form" action ="/signin">
                     <h3 id = "form-title">Sign Up</h3>
-                    <input type = "text" placeholder = "Email" id = "email-input" class = "inputs">
-                    <input type = "text" placeholder = "Username" id = "user-input" class = "inputs">
-                    <input type = "password" placeholder = "Password" id = "password-input" class = "inputs">
+                    <!-- <input type = "text" placeholder = "Email" id = "email-input" class = "inputs"> -->
+                    <div>
+                        <label for="user-input">Username</label>
+                        <input type = "text" name="user-input" placeholder = "Username" id = "user-input" class = "inputs">
+                    </div>
+                    <!-- <div>
+                        <label for="password-input">Password</label>
+                        <input type = "password" name="password-input" placeholder = "Password" id = "password-input" class = "inputs">
+                    </div> -->
                     <br>
-                    <button id = "enter" class = "inputs button">Enter</button>
+                    <button id = "enter" onclick="signIn()" class = "inputs button">Enter</button>
                     
             </form>
+            <script>
+            function signIn(){
+                console.log('hello')
+                $.ajax({
+                    type: "POST",
+                    url: "/signin",
+                    data: {
+                        username: document.getElementById("user-input").value,
+                        password: document.getElementById("password-input").value
+                    },
+                    success: success,
+                    dataType: dataType
+                });
+            }
+            </script>
         </div>
         <div id = "tbf">
 
