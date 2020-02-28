@@ -2,7 +2,7 @@ const express = require("express");
 const server = express();
 const ejs = require('ejs');
 const fs = require('fs');
-server.set('view2 engine','ejs');
+server.set('view engine','ejs');
 server.use(express.static(__dirname));
 let data;
 try{
@@ -18,8 +18,7 @@ server.get("/signin", (req, res) => {
             "username": req.query["user-input"]
         }
         fs.writeFileSync("database.json", JSON.stringify(data), "utf8")
-        let example = document.getElementById("example");
-        example.innerHTML = data.value;
+        
     }
     res.render("room.ejs")
     

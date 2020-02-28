@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel = "stylesheet" type = "text/css" href = "room.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <title>Chatroom</title>
+        <style>
+            body {
+                font-family: 'Open Sans', ;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div id = "heading">
+            <span onclick="openNav()" id = "open"><i class = "material-icons">menu</i></span>
+            <div id  ="placeholder">
+                <div id = "chat-title">
+                    <p>Chats</p>
+                   <button id="newChat">Random Chat</button> 
+                </div>
+            </div>
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="index">Home</a>
+            <a href="speca">Chat</a>
+            <a href="profile">Profile</a>
+            <a href="settings">Settings</a>
+        </div>
+
+        <div id = "chat-area">
+            <div id = "text-destination">
+
+            </div>
+            <input type="text" placeholder = "Nickname" id="nickname">
+            <input type = "text" placeholder = "Enter Message" id="message">
+            <button id="enter">Enter</button>
+        </div>
+        <div id = "filler">
+            
+        </div>
+        <script>
+                let text_arrival = document.getElementById("text-destination");
+                let newChat = document.getElementById("newChat");
+                newChat.onclick = () => {
+                    $.ajax({
+                        type: "POST",
+                        url: "/newChat",
+                        data: {
+                            username: "test"
+                        },
+                        success: () => {
+                            location.reload(true);
+                        }
+                    })
+                }
+                let chatroomNumbers = [0];
+                let chatrooms = [];
+                // for(let i = 0; i < chatroomNumbers.length; i++){
+                //     chatrooms.push(io.connect(`http://localhost:3000/${chatroomNumbers[i]}`))
+                //     chatrooms[i].on('connection', (socket) => {
+                //         console.log('connected')
+                //         socket.on('newmessage', (message) => {
+                //             console.log('message recieved')
+                //             let new_message = document.createElement("div");
+                //             new_message.innerHTML = message.username + ": " + message.message;
+                //             text_arrival.appendChild(new_message);
+                //         })
+                        
+                //     })
+                // }
+                const socket = io("http://localhost:3000", {transports: ['websocket']});
+                socket.on('connection', () => {
+                    console.log('connected')
+                })
+                socket.on('newmessage',(message) => {
+                    console.log('message recieved')
+                    let new_message = document.createElement("div");
+                    new_message.innerHTML = message.username + ": " + message.message;
+                    text_arrival.appendChild(new_message);
+                })
+                let enter = document.getElementById("enter");
+                enter.onclick = () => {
+                    console.log("message sent")
+                    $.ajax({
+                        type: "PUT",
+                        url: "/sendMessage",
+                        data: {
+                            message: {
+                                username: document.getElementById("nickname").value,
+                                message: document.getElementById("message").value,
+                            },
+                            room: 0
+                        },
+                        success: (response) => {
+
+                        },
+                        dataType: "JSON"
+                    });
+
+                    socket.emit('newmessage', {
+                        username: document.getElementById("nickname").value,
+                        message: document.getElementById("message").value,
+                    })
+                }                                       
+                $.ajax({
+                    type: "POST",
+                    url: "/getchat",
+                    data: {
+                        index: 0
+                    },
+                    dataType: "JSON",
+                    success: (response) => {
+                        for(let i = 0; i < response.length; i++){
+                            let new_message =document.createElement("div");
+                            new_message.innerHTML = response[i].username + ": " + response[i].message;
+                            text_arrival.appendChild(new_message);
+                        }
+                    }
+                })
+                
+                
+                /* Set the width of the side navigation to 250px */
+                function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+                }
+        
+                /* Set the width of the side navigation to 0 */
+                function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                }
+
+
+
+                // enter.onclick = function(event) {
+                //     event.preventDefault();
+                //     text_arrival.innerHTML = document.getElementById("message").value;
+                // }
+                
+        </script>
+    </body>
+</html>
