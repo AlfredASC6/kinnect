@@ -98,6 +98,7 @@ input[type=submit] {
     background-color: rgb(230, 216, 215);
 }
 #extra {
+    background-position: center;
     height: 300px;
     background-color: black;
 }
