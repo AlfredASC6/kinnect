@@ -22,11 +22,7 @@
     <div id = "div">
         <span onclick="openNav()" id = "open"><i class = "material-icons">menu</i></span>
         <img src = "images/Kinnect.png" id = "logo"> 
-        <div id  ="placeholder">
-            <div id = "chat-title">
-                Chats
-            </div>
-        </div>
+        
     </div>
     <p id = "desc">
         Kinnect is a new social platform that allows you to communicate with people across the world while speaking in you native language. 
@@ -34,7 +30,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="index">Home</a>
-        <a id="chat">Chat</a>
+        <a id="chat" href = "speca">Chat</a>
         <a href="profile">Profile</a>
         <a href="settings.ejs">Settings</a>
     </div>
@@ -44,14 +40,14 @@
         
         document.getElementById("chat").onclick = () => {
             $.ajax({
-                    type: "POST",
-                    url: "/speca",
-                    data: {
-                        username: "test"
-                    },
-                    success: success,
-                    dataType: "JSON"
-                });
+                type: "POST",
+                url: "/speca",
+                data: {
+                    username: "test"
+                },
+                success: success,
+                dataType: "JSON"
+            });
         }
         /* Set the width of the side navigation to 250px */
         function openNav() {

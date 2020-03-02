@@ -15,7 +15,7 @@ server.set('view engine','ejs');
 server.use(express.static("public"));
 
 server.get("/", (req, res) => {
-    res.render("index")
+    res.render("settings")
 })
 let data;
 try{
@@ -24,7 +24,8 @@ try{
     data = {
         "users": {},
         "rooms": [],
-        "usernames": []
+        "usernames": [],
+        "toBeTranslated": []
 }
 
     fs.writeFileSync("database.json", JSON.stringify(data), "utf8")
@@ -36,15 +37,19 @@ server.post("/getchat", (req, res) => {
     console.log('chat requested')
     res.send(data.rooms[req.body.index]);
 })
+// server.post("/translator",(req, res)=> {
+//     console.log(req.data.toBeTranslated)
+
+// })
 server.post("/newChat", (req, res) => {
     console.log('chat started', req.body)
     data.rooms.push([])
-    data.users[req.body.username].rooms.push(data.rooms.length - 1);
+    data.users[req.body.username].rooms.push(req.body.chatID);
     let randomUser = data.usernames[Math.floor(Math.random() * data.usernames.length)];
     while(randomUser == req.body.username){
         randomUser = data.usernames[Math.floor(Math.random() * data.usernames.length)];
     }
-    data.users[randomUser].rooms.push(data.rooms.length - 1);
+    data.users[randomUser].rooms.push(req.body.chatID);
     roomSockets.push(io.of(`/${roomSockets.length - 1}`).on('connection', (socket) => {
     }))
     updateData();
@@ -96,7 +101,12 @@ server.get("/home", (req, res) => {
         username: req.body.username
     })
 })
-
+server.post("/chatrooms", (req,res)=> {
+    console.log(data.users[req.body.username].rooms)
+    res.json({
+        rooms: data.users[req.body.username].rooms
+    })
+})  
 server.put("/sendMessage", (req,res) => {
     data.rooms[parseInt(req.body.room)].push(req.body.message) // this should be the laguage I tranlste for api -- req.body.message
     updateData();
@@ -119,3 +129,28 @@ io.on('newmessage', () => {
 //         console.log('test')
 //     })
 // }
+// Imports the Google Cloud client library
+// const {Translate} = require('@google-cloud/translate').v2;
+
+// // Creates a client
+// const translate = new Translate();
+
+// /**
+//  * TODO(developer): Uncomment the following lines before running the sample.
+//  */
+// const text = 'The text to translate, e.g. Hello, world!';
+// const target = 'The target language, e.g. es';
+
+// async function translateText() {
+//   // Translates the text into the target language. "text" can be a string for
+//   // translating a single piece of text, or an array of strings for translating
+//   // multiple texts.
+//   let [translations] = await translate.translate(text, target);
+//   translations = Array.isArray(translations) ? translations : [translations];
+//   console.log('Translations:');
+//   translations.forEach((translation, i) => {
+//     console.log(`${text[i]} => (${target}) ${translation}`);
+//   });
+// }
+
+// translateText();

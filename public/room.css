@@ -12,7 +12,7 @@ body {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #111; /* Black*/
+    background-color: #283044; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -70,7 +70,7 @@ body {
 }
 #chat-area {
     
-    height:400px;
+    height:500px;
     background-color: rgb(230, 216, 215);
 }
 #text-destination {
@@ -81,12 +81,15 @@ body {
     width: 450px;
     border: solid black 2px;
     border-radius: 15px;
+    overflow: auto;
+    padding: 5px;
 }
 #message-holder {
     display: flex;
     justify-content: center;
     background-color: rgb(230, 216, 215);
     overflow: auto;
+
 }
 #filler {
     background-color: black;
@@ -100,6 +103,10 @@ body {
         border-left-color: rgb(33, 150, 243) !important;
     height: 30px;
     border-radius: 15px;
+    /* position: absolute;
+    top: 100;
+    left: 350; */
+
 }
 #enter {
     height: 30px;
@@ -139,4 +146,10 @@ body {
     border-spacing: 10px;
     border-radius: 15px;
     padding-left: 5px;
+    
+}
+#chat {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(230, 216, 215);
 }

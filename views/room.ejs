@@ -41,30 +41,203 @@
             <div id = "text-destination">
 
             </div>
-            <input type="text" placeholder = "Nickname" id="nickname">
+        </div>
+        <div id = "chat"> 
             <input type = "text" placeholder = "Enter Message" id="message">
             <button id="enter">Enter</button>
         </div>
         <div id = "filler">
             
         </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+
         <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDn3rk0qLju55HAIEKLT086tDF3rzWV4Ik",
+            authDomain: "kinnect-bc6a7.firebaseapp.com",
+            databaseURL: "https://kinnect-bc6a7.firebaseio.com",
+            projectId: "kinnect-bc6a7",
+            storageBucket: "kinnect-bc6a7.appspot.com",
+            messagingSenderId: "1006689679560",
+            appId: "1:1006689679560:web:f4528cf29732ba77958dfd"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        </script>
+        <script>
+        
+
+        </script>
+        <script>
+                let translated;
+                let translations;
+                let rooms;
+                let database = firebase.firestore();
+                let db = firebase.database();
                 let text_arrival = document.getElementById("text-destination");
                 let newChat = document.getElementById("newChat");
+                $.ajax({
+                    type: "POST",
+                    url: "/chatrooms",
+                    data: {
+                        "username": "Leo"
+                    },
+                    dataType: "JSON",
+                    success: (response) => {
+                        console.log(response)
+                        rooms = response.rooms
+                        console.log(rooms)
+                        database.collection("rooms").doc(response.rooms[0]).get().then(chat => {
+                            let messages = chat.data().messages;
+
+                            // for(let i = 0; i< messages.length; i++){
+                            //     console.log(messages[i])
+                            //     let new_message = document.createElement("div");
+                            //     new_message.innerHTML = messages[i].username + ": " + messages[i].message;
+                            //     text_arrival.appendChild(new_message);
+                            // }
+                        })
+                        // database.collection("translations").doc(rooms[0]).onSnapshot(snapshot =>{
+                        //     let tbtransl = snapshot.data().messages
+                        //     console.log(translations);
+                        // }) 
+                        database.collection("rooms").doc(rooms[0]).onSnapshot(snapshot =>{
+                            
+                            // console.log(snapshot.data()); 
+                            console.log(rooms);
+                            let messages = snapshot.data().messages
+                            console.log(messages);
+                            let input = [];  
+                            for(let i = 0; i <messages.length; i++){
+                                input.push(messages[i].message);
+                                console.log(input)
+                                // database.collection("input")
+                                database.collection("translations").doc("toTranslate").set({
+                                    input: input.toString(),
+                                
+                                // }).onSnapshot(snapshot =>{
+                                //     console.log("It worked")
+                                // })
+                                }) 
+                                // database.collection("translations").doc("translated").onSnapshot(snapshot =>{
+                                //     console.log(translated)
+                                // })
+                                // .then(result => {
+                                    
+                                //     console.log(result);
+                                // })
+                            }
+
+                            database.collection("translations").doc("toTranslate").onSnapshot(snapshot => {
+                                console.log(snapshot.data());
+                                console.log(snapshot.data().translated["fr"].split(","))
+
+                                let actualTranslatedMessage = snapshot.data().translated["fr"].split(",");
+
+                                for (let i = 0; i<actualTranslatedMessage.length; i++) {
+                                    let new_message = document.createElement("div");
+                    
+                                    new_message.innerHTML = messages[i].username + ": " + actualTranslatedMessage[i];
+                                    text_arrival.appendChild(new_message);
+
+                                }
+                                // let translatedArray = Object.entries(snapshot.data())
+                                // console.log(snapshot.data());
+                                
+
+                                // for(let i = 0; i< messages.length; i++){
+                                // // console.log(messages[i])
+                                // let new_message = document.createElement("div");
+                                // let translated = snapshot.data()
+                                
+                                // new_message.innerHTML = messages[i].username + ": " + translated;
+                                // text_arrival.appendChild(new_message);
+                                // }
+                            })
+                                
+                            // database.collection('translations').get(translated)
+                            //     .then((snapshot) => {
+                            //         snapshot.forEach((doc) => {
+                            //             console.log(doc.id, '=>', doc.data());
+                            //         });
+                            //     })
+                            //     .catch((err) => {
+                            //         console.log('Error getting documents', err);
+                            // });
+                            //  
+                            // $.ajax({
+                            //     type: "POST",
+                            //     url: "/translator",
+                            //     data: {
+                            //         messages: messages,
+                            //     },
+                            //     dataType: "JSON",
+                            //     success: (response1) =>{
+                            //         console.log(response1);
+                            //     }
+                            // })
+                            // $.ajax ({
+                            //     type: "POST",
+                            //     url : "https://translation.googleapis.com/language/translate/v2/detect",
+                            //     data: {
+                            //         "mimeType": "text/plain",
+                            //         "contents": toTranslate,
+                            //     },
+                            //     success: (response)=>{
+                            //         console.log(response)
+                            //     }, 
+                                 
+                            // })
+                            // $.ajax({
+                            //     type: "POST",
+                            //     "Content-Type": "application/json",
+                            //     url: "https://translation.googleapis.com/v3/parent=projects/kinnect-269723/:translateText?key=AIzaSyBdlSmj3FE7NnSrU73esxn1U2MqEUJACnw",
+                            //     data: {
+                            //         "mimeType": "text/plain",
+                            //         "targetLanguageCode": "es",
+                            //         "contents": toTranslate
+                            //     },
+                            //     success: (response) => {
+                            //         console.log(response);
+                            //     },
+                            //     dataType: "jsonp",
+                            //     "X-HTTP-Method-Override": "GET",
+                            //     })
+                            for(let i = 0; i< messages.length; i++){
+                                // console.log(messages[i])
+                                let new_message = document.createElement("div");
+                    
+                                
+                                new_message.innerHTML = messages[i].username + ": " + messages[i].message;
+                                text_arrival.appendChild(new_message);
+                            }
+                        })
+                    }
+                })
+
                 newChat.onclick = () => {
-                    $.ajax({
-                        type: "POST",
-                        url: "/newChat",
-                        data: {
-                            username: "test"
-                        },
-                        success: () => {
-                            location.reload(true);
-                        }
+                    database.collection("rooms").add({messages: []}).then(ref => {
+                        $.ajax({
+                            type: "POST",
+                            url: "/newChat",
+                            data: {
+                                username: "Leo",
+                                chatID: ref.id
+                            },
+                            success: () => {
+                                location.reload(true);
+                            }
+                        })
                     })
                 }
                 let chatroomNumbers = [0];
                 let chatrooms = [];
+                
                 // for(let i = 0; i < chatroomNumbers.length; i++){
                 //     chatrooms.push(io.connect(`http://localhost:3000/${chatroomNumbers[i]}`))
                 //     chatrooms[i].on('connection', (socket) => {
@@ -78,56 +251,70 @@
                         
                 //     })
                 // }
-                const socket = io("http://localhost:3000", {transports: ['websocket']});
-                socket.on('connection', () => {
-                    console.log('connected')
-                })
-                socket.on('newmessage',(message) => {
-                    console.log('message recieved')
-                    let new_message = document.createElement("div");
-                    new_message.innerHTML = message.username + ": " + message.message;
-                    text_arrival.appendChild(new_message);
-                })
+                // const socket = io("http://localhost:3000", {transports: ['websocket']});
+                // socket.on('connection', () => {
+                //     console.log('connected')
+                // })
+                // socket.on('newmessage',(message) => {
+                //     console.log('message recieved')
+                //     let new_message = document.createElement("div");
+                //     new_message.innerHTML = message.username + ": " + message.message;
+                //     text_arrival.appendChild(new_message);
+                // })
                 let enter = document.getElementById("enter");
+                let testThing;
                 enter.onclick = () => {
-                    console.log("message sent")
-                    $.ajax({
-                        type: "PUT",
-                        url: "/sendMessage",
-                        data: {
-                            message: {
-                                username: document.getElementById("nickname").value,
+                    // for (let i = 0; i<rooms.length; i++) {
+                        message.innerHTML = " ";
+                        database.collection("rooms").doc(rooms[0]).get().then(response => {
+                            
+                            let temp = response.data().messages;
+                            temp.push({ 
+                                // username: document.getElementById("nickname").value,
+                                username: "Leo",
                                 message: document.getElementById("message").value,
-                            },
-                            room: 0
-                        },
-                        success: (response) => {
+                            })
+                            database.collection("rooms").doc(rooms[0]).update({messages: temp})
+                        })
+                    // }
+                        // console.log("message sent")
+                    // $.ajax({
+                    //     type: "PUT",
+                    //     url: "/sendMessage",
+                    //     data: {
+                    //         message: {
+                    //             username: document.getElementById("nickname").value,
+                    //             message: document.getElementById("message").value,
+                    //         },
+                    //         room: 0
+                    //     },
+                    //     success: (response) => {
 
-                        },
-                        dataType: "JSON"
-                    });
+                    //     },
+                    //     dataType: "JSON"
+                    // });
 
-                    socket.emit('newmessage', {
-                        username: document.getElementById("nickname").value,
-                        message: document.getElementById("message").value,
-                    })
+                    // socket.emit('newmessage', {
+                    //     username: document.getElementById("nickname").value,
+                    //     message: document.getElementById("message").value,
+                    // })
                 }                                       
-                $.ajax({
-                    type: "POST",
-                    url: "/getchat",
-                    data: {
-                        index: 0
-                    },
-                    dataType: "JSON",
-                    success: (response) => {
-                        for(let i = 0; i < response.length; i++){
-                            let new_message =document.createElement("div");
-                            new_message.innerHTML = response[i].username + ": " + response[i].message;
-                            text_arrival.appendChild(new_message);
-                        }
-                    }
-                })
-                
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/getchat",
+                //     data: {
+                //         index: 0
+                //     },
+                //     dataType: "JSON",
+                //     success: (response) => {
+                //         for(let i = 0; i < response.length; i++){
+                //             let new_message =document.createElement("div");
+                //             new_message.innerHTML = response[i].username + ": " + response[i].message;
+                //             text_arrival.appendChild(new_message);
+                //         }
+                //     }
+                // })
+               
                 
                 /* Set the width of the side navigation to 250px */
                 function openNav() {
