@@ -15,7 +15,7 @@ server.set('view engine','ejs');
 server.use(express.static("public"));
 
 server.get("/", (req, res) => {
-    res.render("settings")
+    res.render("index")
 })
 let data;
 try{
@@ -71,7 +71,7 @@ server.get("/signin", (req, res) => {
     
 })
 server.get("/index", (req, res) => {
-    res.render("home", {
+    res.render("index", {
         username: req.body.username
     });
 })
@@ -91,7 +91,7 @@ server.get("/sign", (req,res) => {
         username: req.body.username
     })
 })
-server.get("/speca", (req,res) => {
+server.get("/room", (req,res) => {
     res.render("room", {
         username: req.body.username
     })

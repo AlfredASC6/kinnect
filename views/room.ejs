@@ -58,7 +58,7 @@
         <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            apiKey: "AIzaSyDn3rk0qLju55HAIEKLT086tDF3rzWV4Ik",
+            
             authDomain: "kinnect-bc6a7.firebaseapp.com",
             databaseURL: "https://kinnect-bc6a7.firebaseio.com",
             projectId: "kinnect-bc6a7",
@@ -102,50 +102,45 @@
                             //     text_arrival.appendChild(new_message);
                             // }
                         })
+                    }
+                })
                         // database.collection("translations").doc(rooms[0]).onSnapshot(snapshot =>{
                         //     let tbtransl = snapshot.data().messages
                         //     console.log(translations);
                         // }) 
-                        database.collection("rooms").doc(rooms[0]).onSnapshot(snapshot =>{
-                            
-                            // console.log(snapshot.data()); 
-                            console.log(rooms);
-                            let messages = snapshot.data().messages
-                            console.log(messages);
-                            let input = [];  
-                            for(let i = 0; i <messages.length; i++){
-                                input.push(messages[i].message);
-                                console.log(input)
-                                // database.collection("input")
-                                database.collection("translations").doc("toTranslate").set({
-                                    input: input.toString(),
+                        database.collection("translations").doc("toTranslate").get().then(response => {
+                            let actualTranslatedMessage = response.data().translated["en"].split(",");
+                            let new_message = document.createElement("div");
+                            let new_message = document.createElement("div");
+            
+                            for (let i = 0; i<actualTranslatedMessage.length; i++) {
+                                new_message.innerHTML = "Alfred" + ": " + actualTranslatedMessage[i];
                                 
-                                // }).onSnapshot(snapshot =>{
-                                //     console.log("It worked")
-                                // })
-                                }) 
-                                // database.collection("translations").doc("translated").onSnapshot(snapshot =>{
-                                //     console.log(translated)
-                                // })
-                                // .then(result => {
-                                    
-                                //     console.log(result);
-                                // })
-                            }
-
-                            database.collection("translations").doc("toTranslate").onSnapshot(snapshot => {
-                                console.log(snapshot.data());
-                                console.log(snapshot.data().translated["fr"].split(","))
-
-                                let actualTranslatedMessage = snapshot.data().translated["fr"].split(",");
-
-                                for (let i = 0; i<actualTranslatedMessage.length; i++) {
-                                    let new_message = document.createElement("div");
-                    
-                                    new_message.innerHTML = messages[i].username + ": " + actualTranslatedMessage[i];
-                                    text_arrival.appendChild(new_message);
-
+                                if (i%2 ==0) {
+                                    new_message.style["background-color"]= "blue";
                                 }
+                                
+                            }
+                                text_arrival.appendChild(new_message);
+                                
+                                database.collection("translations").doc("toTranslate").onSnapshot(snapshot => {
+                                // console.log(snapshot.data());
+                                // console.log(snapshot.data().translated["fr"].split(","))
+
+                                let actualTranslatedMessage = snapshot.data().translated["en"].split(",");
+                                let new_message = document.createElement("div");
+                    
+                                new_message.innerHTML = "Alfred" + ": " + actualTranslatedMessage[actualTranslatedMessage.length -1];
+                                text_arrival.appendChild(new_message);
+                                // new_message.id = New_Message;
+                                new_message.style["background-color"]= "#4169E1";
+                                // for (let i = 0; i<actualTranslatedMessage.length; i++) {
+                                //     let new_message = document.createElement("div");
+                    
+                                //     new_message.innerHTML = messages[i].username + ": " + actualTranslatedMessage[actualTranslatedMessage.length -1];
+                                //     text_arrival.appendChild(new_message);
+
+                                // }
                                 // let translatedArray = Object.entries(snapshot.data())
                                 // console.log(snapshot.data());
                                 
@@ -159,68 +154,98 @@
                                 // text_arrival.appendChild(new_message);
                                 // }
                             })
+                        })
+                       
+                //         database.collection("rooms").doc(rooms[0]).onSnapshot(snapshot =>{
+                            
+                //             // console.log(snapshot.data()); 
+                //             console.log(rooms);
+                //             let messages = snapshot.data().messages
+                //             console.log(messages);
+                //             let input = [];  
+                //             for(let i = 0; i <messages.length; i++){
+                //                 input.push(messages[i].message);
+                //                 console.log(input)
+                //                 // database.collection("input")
+                //                 database.collection("translations").doc("toTranslate").set({
+                //                     input: input.toString(),
                                 
-                            // database.collection('translations').get(translated)
-                            //     .then((snapshot) => {
-                            //         snapshot.forEach((doc) => {
-                            //             console.log(doc.id, '=>', doc.data());
-                            //         });
-                            //     })
-                            //     .catch((err) => {
-                            //         console.log('Error getting documents', err);
-                            // });
-                            //  
-                            // $.ajax({
-                            //     type: "POST",
-                            //     url: "/translator",
-                            //     data: {
-                            //         messages: messages,
-                            //     },
-                            //     dataType: "JSON",
-                            //     success: (response1) =>{
-                            //         console.log(response1);
-                            //     }
-                            // })
-                            // $.ajax ({
-                            //     type: "POST",
-                            //     url : "https://translation.googleapis.com/language/translate/v2/detect",
-                            //     data: {
-                            //         "mimeType": "text/plain",
-                            //         "contents": toTranslate,
-                            //     },
-                            //     success: (response)=>{
-                            //         console.log(response)
-                            //     }, 
+                //                 // }).onSnapshot(snapshot =>{
+                //                 //     console.log("It worked")
+                //                 // })
+                //                 }) 
+                //                 // database.collection("translations").doc("translated").onSnapshot(snapshot =>{
+                //                 //     console.log(translated)
+                //                 // })
+                //                 // .then(result => {
+                                    
+                //                 //     console.log(result);
+                //                 // })
+                //             }
+
+                           
+                                
+                //             // database.collection('translations').get(translated)
+                //             //     .then((snapshot) => {
+                //             //         snapshot.forEach((doc) => {
+                //             //             console.log(doc.id, '=>', doc.data());
+                //             //         });
+                //             //     })
+                //             //     .catch((err) => {
+                //             //         console.log('Error getting documents', err);
+                //             // });
+                //             //  
+                //             // $.ajax({
+                //             //     type: "POST",
+                //             //     url: "/translator",
+                //             //     data: {
+                //             //         messages: messages,
+                //             //     },
+                //             //     dataType: "JSON",
+                //             //     success: (response1) =>{
+                //             //         console.log(response1);
+                //             //     }
+                //             // })
+                //             // $.ajax ({
+                //             //     type: "POST",
+                //             //     url : "https://translation.googleapis.com/language/translate/v2/detect",
+                //             //     data: {
+                //             //         "mimeType": "text/plain",
+                //             //         "contents": toTranslate,
+                //             //     },
+                //             //     success: (response)=>{
+                //             //         console.log(response)
+                //             //     }, 
                                  
-                            // })
-                            // $.ajax({
-                            //     type: "POST",
-                            //     "Content-Type": "application/json",
-                            //     url: "https://translation.googleapis.com/v3/parent=projects/kinnect-269723/:translateText?key=AIzaSyBdlSmj3FE7NnSrU73esxn1U2MqEUJACnw",
-                            //     data: {
-                            //         "mimeType": "text/plain",
-                            //         "targetLanguageCode": "es",
-                            //         "contents": toTranslate
-                            //     },
-                            //     success: (response) => {
-                            //         console.log(response);
-                            //     },
-                            //     dataType: "jsonp",
-                            //     "X-HTTP-Method-Override": "GET",
-                            //     })
-                            // for(let i = 0; i< messages.length; i++){
-                            //     // console.log(messages[i])
-                            //     let new_message = document.createElement("div");
+                //             // })
+                //             // $.ajax({
+                //             //     type: "POST",
+                //             //     "Content-Type": "application/json",
+                //             //     url: "https://translation.googleapis.com/v3/parent=projects/kinnect-269723/:translateText?key=AIzaSyBdlSmj3FE7NnSrU73esxn1U2MqEUJACnw",
+                //             //     data: {
+                //             //         "mimeType": "text/plain",
+                //             //         "targetLanguageCode": "es",
+                //             //         "contents": toTranslate
+                //             //     },
+                //             //     success: (response) => {
+                //             //         console.log(response);
+                //             //     },
+                //             //     dataType: "jsonp",
+                //             //     "X-HTTP-Method-Override": "GET",
+                //             //     })
+                //             // for(let i = 0; i< messages.length; i++){
+                //             //     // console.log(messages[i])
+                //             //     let new_message = document.createElement("div");
                                 
                     
                                 
-                            //     new_message.innerHTML = messages[i].username + ": " + messages[i].message;
-                            //     text_arrival.appendChild(new_message);
-                            // }
-                        })
-                    }
-                })
-
+                //             //     new_message.innerHTML = messages[i].username + ": " + messages[i].message;
+                //             //     text_arrival.appendChild(new_message);
+                //             // }
+                //         })
+                //     }
+                // })
+                    
                 newChat.onclick = () => {
                     database.collection("rooms").add({messages: []}).then(ref => {
                         $.ajax({
