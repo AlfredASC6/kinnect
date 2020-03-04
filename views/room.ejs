@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <title>Chatroom</title>
         <style>
             body {
@@ -69,10 +69,7 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         </script>
-        <script>
         
-
-        </script>
         <script>
                 let translated;
                 let translations;
@@ -89,18 +86,20 @@
                     },
                     dataType: "JSON",
                     success: (response) => {
-                        console.log(response)
+                        // console.log(response)
                         rooms = response.rooms
                         console.log(rooms)
                         database.collection("rooms").doc(response.rooms[0]).get().then(chat => {
                             let messages = chat.data().messages;
-
-                            // for(let i = 0; i< messages.length; i++){
-                            //     console.log(messages[i])
-                            //     let new_message = document.createElement("div");
-                            //     new_message.innerHTML = messages[i].username + ": " + messages[i].message;
-                            //     text_arrival.appendChild(new_message);
-                            // }
+                            // console.log(messages);
+                            
+                            for(let i = 0; i< messages.length; i++){
+                                // console.log(messages[i])
+                                let new_message = document.createElement("div");
+                                new_message.innerHTML = messages[i].username + ": " + messages[i].message;
+                                text_arrival.appendChild(new_message);
+                                document.getElementById("text-destination").scrollBottom = new_message.offsetHeight + new_message.offsetTop;
+                            }
                         })
                     }
                 })
@@ -108,32 +107,36 @@
                         //     let tbtransl = snapshot.data().messages
                         //     console.log(translations);
                         // }) 
+
                         database.collection("translations").doc("toTranslate").get().then(response => {
                             let actualTranslatedMessage = response.data().translated["en"].split(",");
-                            let new_message = document.createElement("div");
-                            let new_message = document.createElement("div");
-            
+                            console.log(response)
+                            
+                            // let new_message = document.createElement("div");
+                            
                             for (let i = 0; i<actualTranslatedMessage.length; i++) {
-                                new_message.innerHTML = "Alfred" + ": " + actualTranslatedMessage[i];
-                                
-                                if (i%2 ==0) {
-                                    new_message.style["background-color"]= "blue";
-                                }
-                                
-                            }
+                                let new_message = document.createElement("div");
+                                new_message.innerHTML = "Alfred" + ": " + actualTranslatedMessage[actualTranslatedMessage.length-1];
                                 text_arrival.appendChild(new_message);
+                                // if (i%2 ==0) {
+                                //     new_message.style["background-color"]= "blue";
+                                // }
+                            }
                                 
-                                database.collection("translations").doc("toTranslate").onSnapshot(snapshot => {
+                                
+                            database.collection("translations").doc("toTranslate").onSnapshot(snapshot => {
                                 // console.log(snapshot.data());
-                                // console.log(snapshot.data().translated["fr"].split(","))
+                                console.log(snapshot.data().translated["fr"].split(","))
 
-                                let actualTranslatedMessage = snapshot.data().translated["en"].split(",");
+                                let actualTranslatedMessage = snapshot.data().translated["fr"].split(",");
                                 let new_message = document.createElement("div");
                     
                                 new_message.innerHTML = "Alfred" + ": " + actualTranslatedMessage[actualTranslatedMessage.length -1];
                                 text_arrival.appendChild(new_message);
                                 // new_message.id = New_Message;
                                 new_message.style["background-color"]= "#4169E1";
+                                
+
                                 // for (let i = 0; i<actualTranslatedMessage.length; i++) {
                                 //     let new_message = document.createElement("div");
                     
@@ -156,32 +159,33 @@
                             })
                         })
                        
-                //         database.collection("rooms").doc(rooms[0]).onSnapshot(snapshot =>{
+                        database.collection("rooms").doc("eBKfwoaQPZBlnV3EwLyH").onSnapshot(snapshot =>{
                             
-                //             // console.log(snapshot.data()); 
-                //             console.log(rooms);
-                //             let messages = snapshot.data().messages
-                //             console.log(messages);
-                //             let input = [];  
-                //             for(let i = 0; i <messages.length; i++){
-                //                 input.push(messages[i].message);
-                //                 console.log(input)
-                //                 // database.collection("input")
-                //                 database.collection("translations").doc("toTranslate").set({
-                //                     input: input.toString(),
+                            // console.log(snapshot.data()); 
+                            console.log(rooms);
+                            let messages = snapshot.data().messages
+                            console.log(messages);
+                            let input = [];  
+                            for(let i = 0; i <messages.length; i++){
+                                input.push(messages[i].message);
+                                console.log(input)
+                                // database.collection("input")
+                                database.collection("translations").doc("toTranslate").set({
+                                    input: input.toString(),
                                 
-                //                 // }).onSnapshot(snapshot =>{
-                //                 //     console.log("It worked")
-                //                 // })
-                //                 }) 
-                //                 // database.collection("translations").doc("translated").onSnapshot(snapshot =>{
-                //                 //     console.log(translated)
-                //                 // })
-                //                 // .then(result => {
+                                // }).onSnapshot(snapshot =>{
+                                //     console.log("It worked")
+                                // })
+                                }) 
+                                // database.collection("translations").doc("translated").onSnapshot(snapshot =>{
+                                //     console.log(translated)
+                                // })
+                                // .then(result => {
                                     
-                //                 //     console.log(result);
-                //                 // })
-                //             }
+                                //     console.log(result);
+                                // })
+                            }
+                        })
 
                            
                                 
@@ -247,12 +251,13 @@
                 // })
                     
                 newChat.onclick = () => {
+                    
                     database.collection("rooms").add({messages: []}).then(ref => {
                         $.ajax({
                             type: "POST",
                             url: "/newChat",
                             data: {
-                                username: "Leo",
+                                username: "Alfred",
                                 chatID: ref.id
                             },
                             success: () => {
@@ -297,12 +302,12 @@
                             let temp = response.data().messages;
                             temp.push({ 
                                 // username: document.getElementById("nickname").value,
-                                username: "Leo",
+                                username: "Alfred",
                                 message: document.getElementById("message").value,
                             })
                             database.collection("rooms").doc(rooms[0]).update({messages: temp})
                         })
-                    // }
+                }
                         // console.log("message sent")
                     // $.ajax({
                     //     type: "PUT",
@@ -324,7 +329,7 @@
                     //     username: document.getElementById("nickname").value,
                     //     message: document.getElementById("message").value,
                     // })
-                }                                       
+                                                    
                 // $.ajax({
                 //     type: "POST",
                 //     url: "/getchat",
@@ -354,11 +359,7 @@
 
 
 
-                // enter.onclick = function(event) {
-                //     event.preventDefault();
-                //     text_arrival.innerHTML = document.getElementById("message").value;
-                // }
                 
         </script>
     </body>
-</html>
+</html> 
