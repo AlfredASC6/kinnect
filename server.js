@@ -85,7 +85,7 @@ server.get("/settings", (req,res) => {
         username: req.body.username
         // this will send the username to this specific ejs file
     })
-})
+})                 
 server.get("/sign", (req,res) => {
     res.render("sign", {
         username: req.body.username

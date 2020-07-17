@@ -58,7 +58,7 @@
         <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            
+            apiKey: "AIzaSyDn3rk0qLju55HAIEKLT086tDF3rzWV4Ik", 
             authDomain: "kinnect-bc6a7.firebaseapp.com",
             databaseURL: "https://kinnect-bc6a7.firebaseio.com",
             projectId: "kinnect-bc6a7",
@@ -126,9 +126,9 @@
                                 
                             database.collection("translations").doc("toTranslate").onSnapshot(snapshot => {
                                 // console.log(snapshot.data());
-                                console.log(snapshot.data().translated["fr"].split(","))
+                                console.log(snapshot.data().translated["en"].split(","))
 
-                                let actualTranslatedMessage = snapshot.data().translated["fr"].split(",");
+                                let actualTranslatedMessage = snapshot.data().translated["en"].split(",");
                                 let new_message = document.createElement("div");
                     
                                 new_message.innerHTML = "Alfred" + ": " + actualTranslatedMessage[actualTranslatedMessage.length -1];
